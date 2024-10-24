@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Music_Player.ViewModel
 {
@@ -33,6 +34,8 @@ namespace Music_Player.ViewModel
 
         // Command for setting active song
         public ICommand SetActiveSongCommand { get; private set; }
+        public ICommand NextSongCommand { get; private set; }
+        public ICommand PreviousSongCommand { get; private set; }
 
         // Action to play the selected song (set by MainWindow.xaml.cs)
         public Action<string> PlaySongAction { get; set; }
@@ -44,11 +47,32 @@ namespace Music_Player.ViewModel
             LoadSongs();
 
             SetActiveSongCommand = new RelayCommand<Song>(SetActiveSong);
+            NextSongCommand = new RelayCommand(PlayNextSong);
+            PreviousSongCommand = new RelayCommand(PlayPreviousSong);
+        }
+
+        private void PlayNextSong()
+        {
+            if (ActiveSong == null) return;
+
+            int currentIndex = Songs.IndexOf(ActiveSong);
+            int nextIndex = (currentIndex + 1) % Songs.Count;
+
+            SetActiveSong(Songs[nextIndex]);
+        }
+
+        private void PlayPreviousSong()
+        {
+            if (ActiveSong == null) return;
+
+            int currentIndex = Songs.IndexOf(ActiveSong);
+            int previousIndex = (currentIndex - 1 < 0) ? Songs.Count - 1 : currentIndex - 1;
+            SetActiveSong(Songs[previousIndex]);
         }
 
         private void LoadSongs()
         {
-            string mp3FolderPath = @"I:\Playlists\Unknown";  // Replace with your MP3 folder path
+            string mp3FolderPath = @"C:\Users\danht\Music";  // Replace with your MP3 folder path
             var files = Directory.GetFiles(mp3FolderPath, "*.mp3");
 
             int songNumber = 1;
@@ -78,8 +102,8 @@ namespace Music_Player.ViewModel
                 song.isActive = song == selectedSong;
             }
 
-            ActiveSong = selectedSong; 
-            PlaySongAction?.Invoke(selectedSong.FilePath); 
+            ActiveSong = selectedSong;
+            PlaySongAction?.Invoke(selectedSong.FilePath);
         }
 
         // INotifyPropertyChanged implementation
@@ -110,6 +134,34 @@ namespace Music_Player.ViewModel
         public void Execute(object parameter)
         {
             _execute((T)parameter);
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+    }
+
+    public class RelayCommand : ICommand
+    {
+        private readonly Action _execute;
+        private readonly Func<bool> _canExecute;
+
+        public RelayCommand(Action execute, Func<bool> canExecute = null)
+        {
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute == null || _canExecute();
+        }
+
+        public void Execute(object parameter)
+        {
+            _execute();
         }
 
         public event EventHandler CanExecuteChanged

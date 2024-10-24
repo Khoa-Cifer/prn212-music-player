@@ -2,7 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:uc="clr-namespace:Music_Player.UserControlls"
         Height="700" Width="1050" ResizeMode="NoResize" AllowsTransparency="True"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
@@ -15,14 +14,14 @@
                 <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                
+
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-            
+
             <!--Menu-->
             <Border Background="White" CornerRadius="40 0 0 40" Grid.RowSpan="2">
                 <StackPanel Margin="0 30 0 0">
@@ -61,7 +60,7 @@
                 </StackPanel>
 
             </Border>
-            
+
             <!--Music Section-->
             <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Background="White" Margin="40 60 10 0">
                 <TextBlock Text="Home" Style="{StaticResource titleText}"/>
@@ -84,7 +83,7 @@
                                 <ImageBrush ImageSource="/Images/p1.jpg"/>
                             </Border.Background>
                         </Border>
-                        
+
                         <!--Music List-->
                         <StackPanel Margin="30">
                             <!--
@@ -125,7 +124,7 @@
                     </Grid>
                 </Border>
             </StackPanel>
-            
+
             <!--Right Section-->
             <!--
             
@@ -153,7 +152,7 @@
             -->
 
             <!--Player-->
-            <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Margin="40 0 0 0">
+            <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Grid.Column="1" Margin="40,0,0,0">
                 <StackPanel Orientation="Horizontal">
                     <Ellipse Width="60" Height="60" Margin="10">
                         <Ellipse.Fill>
@@ -167,20 +166,19 @@
                         <TextBlock Text="{Binding ActiveSong.Time}" Foreground="White" FontSize="14"/>
                     </StackPanel>
 
-                    <Button Style="{StaticResource playerButton}">
+                    <Button x:Name="PreviousButton" Style="{StaticResource playerButton}" Click="PreviousButton_Click">
                         <Icon:PackIconMaterial Kind="SkipPrevious" Style="{StaticResource playerButtonIcon}"/>
                     </Button>
 
-                    <Button Style="{StaticResource playerButton}" Command="{Binding PlayCommand}">
-                        <Icon:PackIconMaterial Kind="Play" Style="{StaticResource playerButtonIcon}"/>
+                    <Button Style="{StaticResource playerButton}" Command="{Binding PlayCommand}" Click="Button_PausePlay">
+                        <Icon:PackIconMaterial x:Name="playPauseIcon" Kind="Pause" Style="{StaticResource playerButtonIcon}"/>
                     </Button>
 
-                    <Button Style="{StaticResource playerButton}">
+                    <Button x:Name="NextButton" Style="{StaticResource playerButton}" Click="NextButton_Click">
                         <Icon:PackIconMaterial Kind="SkipNext" Style="{StaticResource playerButtonIcon}"/>
                     </Button>
 
-                    <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider" IsSelectionRangeEnabled="True" VerticalAlignment="Center" Value="5" Width="350" SelectionEnd="{Binding ElementName=slider, Path=Value}"/>
-
+                    <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider" IsSelectionRangeEnabled="True" VerticalAlignment="Center" Value="0.5" Width="350" SelectionEnd="{Binding ElementName=slider, Path=Value}" Minimum="0" Maximum="10" ValueChanged="slider_VolumeChanged"/>
                     <Button Style="{StaticResource playerButton}">
                         <Icon:PackIconMaterial Kind="VolumeMedium" Style="{StaticResource playerButtonIcon}"/>
                     </Button>
@@ -188,6 +186,7 @@
             </Border>
 
             <MediaElement x:Name="mediaElement" Visibility="Collapsed" LoadedBehavior="Manual" UnloadedBehavior="Manual" />
+            <Button x:Name="quitButton" Grid.Column="2" Content="Quit" HorizontalAlignment="Left" Height="17" Margin="361,35,0,0" VerticalAlignment="Top" Width="54" Style="{StaticResource QuitButton}" Click="quitButton_Click"/>
         </Grid>
     </Border>
 </Window>
