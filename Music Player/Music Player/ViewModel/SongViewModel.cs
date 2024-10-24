@@ -55,9 +55,6 @@ namespace Music_Player.ViewModel
 
         public SongViewModel(string filePath)
         {
-            //default view
-            CurrentView = new MusicView();
-
             // Initialize the songs collection
             Songs = new ObservableCollection<Song>();
             LoadSongs(filePath);
@@ -88,6 +85,8 @@ namespace Music_Player.ViewModel
 
         private void LoadSongs(string filePath)
         {
+            CurrentView = new MusicView();
+
             string mp3FolderPath = filePath;  // Replace with your MP3 folder path
             var files = Directory.GetFiles(mp3FolderPath, "*.mp3");
 
@@ -131,12 +130,8 @@ namespace Music_Player.ViewModel
 
         public void ShowVideoView()
         {
-            CurrentView = new VideoView();
-        }
-
-        public void ShowMusicView()
-        {
-            CurrentView = new MusicView();
+            VideoPlayer videoPlayer = new VideoPlayer();
+            videoPlayer.ShowDialog();
         }
     }
 

@@ -20,7 +20,20 @@ namespace Music_Player
         {
             InitializeComponent();
 
-           
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog
+            {
+                InitialDirectory = @"C:\Users",
+                IsFolderPicker = true 
+            };
+
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                _songViewModel = new SongViewModel(dialog.FileName);
+            }
+            else
+            {
+                _songViewModel = new SongViewModel(@"C:\Users\Cifer\Music");
+            }
         }
 
         private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
@@ -80,16 +93,6 @@ namespace Music_Player
             }
         }
 
-        private void ShowMusicView_Click(object sender, RoutedEventArgs e)
-        {
-            _songViewModel.ShowMusicView();
-        }
-
-        private void ShowVideoView_Click(object sender, RoutedEventArgs e)
-        {
-            _songViewModel.ShowVideoView();
-        }
-
         private void SelectFolder_Click(object sender, RoutedEventArgs e)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
@@ -108,6 +111,11 @@ namespace Music_Player
                     mediaElement.MediaEnded += MediaElement_MediaEnded;
                 };
             }
+        }
+
+        private void OpenMusicPlayer_Click(object sender, RoutedEventArgs e)
+        {
+            _songViewModel.ShowVideoView();
         }
     }
 }

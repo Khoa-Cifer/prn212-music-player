@@ -8,19 +8,14 @@
 
     <Border Background="White" CornerRadius="40">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-
-            </Grid.ColumnDefinitions>
-
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="128"/>
             </Grid.RowDefinitions>
 
             <!--Menu-->
+            <!--
+            
             <Border Background="White" CornerRadius="40 0 0 40" Grid.RowSpan="2">
                 <StackPanel Margin="0 30 0 0">
 
@@ -43,6 +38,7 @@
                 </StackPanel>
 
             </Border>
+            -->
 
             <!--Music Section-->
             <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Background="White" Margin="40 60 10 0">
@@ -76,7 +72,7 @@
             -->
 
             <!--Player-->
-            <Border Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Grid.Column="1" Margin="40,1,0,0" Grid.Row="1">
+            <Border Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Grid.Column="1" Margin="0,1,0,0" Grid.Row="1">
                 <StackPanel Orientation="Vertical">
                     <!-- First row: Song Details -->
                     <Grid>
@@ -121,9 +117,11 @@
             </Border>
 
             <MediaElement x:Name="mediaElement" Visibility="Collapsed" LoadedBehavior="Manual" UnloadedBehavior="Manual" />
-            <Button Style="{StaticResource SelectFolderButton}" Content="Select Folder" Grid.Column="2" Margin="280,35,59,520"
-              Click="SelectFolder_Click"/>
-            <Button x:Name="quitButton" Grid.Column="2" Content="Quit" HorizontalAlignment="Left" Height="17" Margin="361,35,0,0" VerticalAlignment="Top" Width="54" Style="{StaticResource QuitButton}" Click="quitButton_Click"/>
+            <Button Style="{StaticResource SelectFolderButton}" Content="Select Folder" Margin="786,35,176,520"
+                    Click="SelectFolder_Click"/>
+            <Button Style="{StaticResource OpenMusicPlayerButton}" Content="Open Music Player" Margin="638,35,315,520"
+                    Click="OpenMusicPlayer_Click"/>
+            <Button x:Name="quitButton" Content="Quit" HorizontalAlignment="Left" Height="17" Margin="924,35,0,0" VerticalAlignment="Top" Width="54" Style="{StaticResource QuitButton}"               Click="quitButton_Click"/>
         </Grid>
     </Border>
 </Window>
