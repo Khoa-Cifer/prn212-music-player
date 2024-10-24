@@ -85,5 +85,15 @@ namespace Music_Player
                 _songViewModel.PreviousSongCommand.Execute(null);
             }
         }
+
+        private void ShowMusicView_Click(object sender, RoutedEventArgs e)
+        {
+            _songViewModel.ShowMusicView();
+        }
+
+        private void ShowVideoView_Click(object sender, RoutedEventArgs e)
+        {
+            _songViewModel.ShowVideoView();
+        }
     }
 }

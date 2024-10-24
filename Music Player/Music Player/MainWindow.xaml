@@ -4,9 +4,7 @@
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Height="700" Width="1050" ResizeMode="NoResize" AllowsTransparency="True"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        >
-
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
 
     <Border Background="White" CornerRadius="40">
         <Grid>
@@ -18,8 +16,8 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="100"/>
+                <RowDefinition/>
+                <RowDefinition Height="128"/>
             </Grid.RowDefinitions>
 
             <!--Menu-->
@@ -28,30 +26,15 @@
 
                     <TextBlock Text="Music Player" Style="{StaticResource menuTitle}"/>
 
-                    <Button Style="{StaticResource menuButton}">
+                    <Button x:Name="Playlist_btn" Style="{StaticResource menuButton}" Click="ShowMusicView_Click">
                         <Grid>
                             <TextBlock Text="Playlists" Margin="0 0 0 2"/>
-                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}" Visibility="Visible"/>
-                        </Grid>
-                    </Button>
-
-                    <Button Style="{StaticResource menuButton}">
-                        <Grid>
-                            <TextBlock Text="Song List" Height="24" VerticalAlignment="Top"/>
                             <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
                         </Grid>
                     </Button>
 
                     <TextBlock Text="Video Player" Style="{StaticResource menuTitle}"/>
-
-                    <Button Style="{StaticResource menuButton}">
-                        <Grid>
-                            <TextBlock Text="Lasted Played" Margin="0 0 0 2"/>
-                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
-                        </Grid>
-                    </Button>
-
-                    <Button Style="{StaticResource menuButton}">
+                    <Button Style="{StaticResource menuButton}" Click="ShowVideoView_Click">
                         <Grid>
                             <TextBlock Text="Video List" Margin="0 0 0 2"/>
                             <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
@@ -63,66 +46,7 @@
 
             <!--Music Section-->
             <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Background="White" Margin="40 60 10 0">
-                <TextBlock Text="Home" Style="{StaticResource titleText}"/>
-
-                <Border CornerRadius="20" Margin="0 20 0 0">
-                    <Border.Background>
-                        <LinearGradientBrush>
-                            <GradientStop Color="#30ad9a" Offset="0"/>
-                            <GradientStop Color="#18c274" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.4" Color="#1fae7e"/>
-                    </Border.Effect>
-
-                    <Grid>
-                        <Border Opacity="0.07" CornerRadius="20">
-                            <Border.Background>
-                                <ImageBrush ImageSource="/Images/p1.jpg"/>
-                            </Border.Background>
-                        </Border>
-
-                        <!--Music List-->
-                        <StackPanel Margin="30">
-                            <!--
-                            <TextBlock Text="Daily Singer" Foreground="White" FontSize="26" FontWeight="Bold"/>
-                            <TextBlock Text="Yoru" Foreground="#c0e6de" FontSize="18" FontWeight="SemiBold" Margin="0 10 0 20"/>
-                            -->
-
-                            <!--
-                            <uc:SongItem Number="01" Title="Never Gonna Give You Up" Time="03:33"/>
-                            <uc:SongItem Number="02" Title="Ticking Away" Time="03:24"/>
-                            <uc:SongItem Number="03" Title="GODS" Time="04:16"/>
-                            <uc:SongItem Number="04" Title="SUPERPOWER" Time="03:10" isActive="True"/>
-                            <uc:SongItem Number="05" Title="Renai Circulation" Time="04:14"/>
-                            <uc:SongItem Number="06" Title="Red" Time="04:47"/>
-                            <uc:SongItem Number="07" Title="You Belong With Me" Time="06:20"/>
-                            -->
-
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300" Grid.Row="0">
-                                <ItemsControl ItemsSource="{Binding Songs}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <!-- SongItem with Mouse Click Event -->
-                                            <StackPanel Orientation="Horizontal" Margin="10">
-                                                <TextBlock Text="{Binding Number}" Width="30" Foreground="White" FontSize="16"/>
-                                                <TextBlock Text="{Binding Title}" Width="200" Foreground="White" FontSize="16"/>
-                                                <TextBlock Text="{Binding Time}" Width="70" Foreground="White" FontSize="16"/>
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                        <i:InvokeCommandAction Command="{Binding DataContext.SetActiveSongCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"/>
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </ScrollViewer>
-                        </StackPanel>
-                    </Grid>
-                </Border>
+                <ContentControl Content="{Binding CurrentView}"/>
             </StackPanel>
 
             <!--Right Section-->
@@ -152,36 +76,47 @@
             -->
 
             <!--Player-->
-            <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Grid.Column="1" Margin="40,0,0,0">
-                <StackPanel Orientation="Horizontal">
-                    <Ellipse Width="60" Height="60" Margin="10">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/Images/p6.jpg"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
+            <Border Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Grid.Column="1" Margin="40,1,0,0" Grid.Row="1">
+                <StackPanel Orientation="Vertical">
+                    <!-- First row: Song Details -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <!-- Song Details -->
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="{Binding ActiveSong.Title}" Foreground="White" FontSize="18" FontWeight="SemiBold"/>
-                        <TextBlock Text="{Binding ActiveSong.Time}" Foreground="White" FontSize="14"/>
+                        <Ellipse Width="60" Height="60" Margin="10" Grid.Column="0">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/Images/p6.jpg"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <StackPanel VerticalAlignment="Center" Grid.Column="1">
+                            <TextBlock Text="{Binding ActiveSong.Title}" Foreground="White" FontSize="18" FontWeight="SemiBold"/>
+                            <TextBlock Text="{Binding ActiveSong.Time}" Foreground="White" FontSize="14"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Second row: Buttons and Slider -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button x:Name="PreviousButton" Style="{StaticResource playerButton}" Click="PreviousButton_Click">
+                            <Icon:PackIconMaterial Kind="SkipPrevious" Style="{StaticResource playerButtonIcon}"/>
+                        </Button>
+
+                        <Button Style="{StaticResource playerButton}" Command="{Binding PlayCommand}" Click="Button_PausePlay">
+                            <Icon:PackIconMaterial x:Name="playPauseIcon" Kind="Pause" Style="{StaticResource playerButtonIcon}"/>
+                        </Button>
+
+                        <Button x:Name="NextButton" Style="{StaticResource playerButton}" Click="NextButton_Click">
+                            <Icon:PackIconMaterial Kind="SkipNext" Style="{StaticResource playerButtonIcon}"/>
+                        </Button>
+
+                        <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider" IsSelectionRangeEnabled="True" VerticalAlignment="Center" Value="0.5" Width="350" SelectionEnd="{Binding ElementName=slider, Path=Value}" Minimum="0" Maximum="10" ValueChanged="slider_VolumeChanged"/>
+
+                        <Button Style="{StaticResource playerButton}">
+                            <Icon:PackIconMaterial Kind="VolumeMedium" Style="{StaticResource playerButtonIcon}"/>
+                        </Button>
                     </StackPanel>
-
-                    <Button x:Name="PreviousButton" Style="{StaticResource playerButton}" Click="PreviousButton_Click">
-                        <Icon:PackIconMaterial Kind="SkipPrevious" Style="{StaticResource playerButtonIcon}"/>
-                    </Button>
-
-                    <Button Style="{StaticResource playerButton}" Command="{Binding PlayCommand}" Click="Button_PausePlay">
-                        <Icon:PackIconMaterial x:Name="playPauseIcon" Kind="Pause" Style="{StaticResource playerButtonIcon}"/>
-                    </Button>
-
-                    <Button x:Name="NextButton" Style="{StaticResource playerButton}" Click="NextButton_Click">
-                        <Icon:PackIconMaterial Kind="SkipNext" Style="{StaticResource playerButtonIcon}"/>
-                    </Button>
-
-                    <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider" IsSelectionRangeEnabled="True" VerticalAlignment="Center" Value="0.5" Width="350" SelectionEnd="{Binding ElementName=slider, Path=Value}" Minimum="0" Maximum="10" ValueChanged="slider_VolumeChanged"/>
-                    <Button Style="{StaticResource playerButton}">
-                        <Icon:PackIconMaterial Kind="VolumeMedium" Style="{StaticResource playerButtonIcon}"/>
-                    </Button>
                 </StackPanel>
             </Border>
 

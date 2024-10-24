@@ -1,4 +1,5 @@
 ﻿using Music_Player.Entities;
+using Music_Player.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,9 +20,21 @@ namespace Music_Player.ViewModel
     {
         // Observable collection of songs
         public ObservableCollection<Song> Songs { get; set; }
-
+        private UserControl _currentView;
         // The active song
         private Song _activeSong;
+
+
+        public UserControl CurrentView
+        {
+            get => _currentView;
+            set
+            {
+                _currentView = value;
+                OnPropertyChanged(nameof(CurrentView));
+            }
+        }
+
         public Song ActiveSong
         {
             get { return _activeSong; }
@@ -42,6 +55,9 @@ namespace Music_Player.ViewModel
 
         public SongViewModel()
         {
+            //default view
+            CurrentView = new MusicView();
+
             // Initialize the songs collection
             Songs = new ObservableCollection<Song>();
             LoadSongs();
@@ -72,7 +88,7 @@ namespace Music_Player.ViewModel
 
         private void LoadSongs()
         {
-            string mp3FolderPath = @"C:\Users\danht\Music";  // Replace with your MP3 folder path
+            string mp3FolderPath = @"I:\Playlists\Unknown";  // Replace with your MP3 folder path
             var files = Directory.GetFiles(mp3FolderPath, "*.mp3");
 
             int songNumber = 1;
@@ -111,6 +127,16 @@ namespace Music_Player.ViewModel
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void ShowVideoView()
+        {
+            CurrentView = new VideoView();
+        }
+
+        public void ShowMusicView()
+        {
+            CurrentView = new MusicView();
         }
     }
 
@@ -169,5 +195,7 @@ namespace Music_Player.ViewModel
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
+
+       
     }
 }
