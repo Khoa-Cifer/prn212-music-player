@@ -5,6 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.WindowsAPICodePack.Dialogs;
+
 
 namespace Music_Player
 {
@@ -18,15 +20,7 @@ namespace Music_Player
         {
             InitializeComponent();
 
-            _songViewModel = new SongViewModel();
-            this.DataContext = _songViewModel;
-
-            _songViewModel.PlaySongAction = (filePath) =>
-            {
-                mediaElement.Source = new Uri(filePath, UriKind.RelativeOrAbsolute);
-                mediaElement.Play();
-                mediaElement.MediaEnded += MediaElement_MediaEnded;
-            };
+           
         }
 
         private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
@@ -94,6 +88,26 @@ namespace Music_Player
         private void ShowVideoView_Click(object sender, RoutedEventArgs e)
         {
             _songViewModel.ShowVideoView();
+        }
+
+        private void SelectFolder_Click(object sender, RoutedEventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = "C:\\Users";
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                MessageBox.Show("You selected: " + dialog.FileName);
+                _songViewModel = new SongViewModel(dialog.FileName);
+                this.DataContext = _songViewModel;
+
+                _songViewModel.PlaySongAction = (filePath) =>
+                {
+                    mediaElement.Source = new Uri(filePath, UriKind.RelativeOrAbsolute);
+                    mediaElement.Play();
+                    mediaElement.MediaEnded += MediaElement_MediaEnded;
+                };
+            }
         }
     }
 }

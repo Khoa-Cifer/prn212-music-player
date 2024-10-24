@@ -53,14 +53,14 @@ namespace Music_Player.ViewModel
         // Action to play the selected song (set by MainWindow.xaml.cs)
         public Action<string> PlaySongAction { get; set; }
 
-        public SongViewModel()
+        public SongViewModel(string filePath)
         {
             //default view
             CurrentView = new MusicView();
 
             // Initialize the songs collection
             Songs = new ObservableCollection<Song>();
-            LoadSongs();
+            LoadSongs(filePath);
 
             SetActiveSongCommand = new RelayCommand<Song>(SetActiveSong);
             NextSongCommand = new RelayCommand(PlayNextSong);
@@ -86,9 +86,9 @@ namespace Music_Player.ViewModel
             SetActiveSong(Songs[previousIndex]);
         }
 
-        private void LoadSongs()
+        private void LoadSongs(string filePath)
         {
-            string mp3FolderPath = @"I:\Playlists\Unknown";  // Replace with your MP3 folder path
+            string mp3FolderPath = filePath;  // Replace with your MP3 folder path
             var files = Directory.GetFiles(mp3FolderPath, "*.mp3");
 
             int songNumber = 1;

@@ -121,6 +121,8 @@
             </Border>
 
             <MediaElement x:Name="mediaElement" Visibility="Collapsed" LoadedBehavior="Manual" UnloadedBehavior="Manual" />
+            <Button Style="{StaticResource SelectFolderButton}" Content="Select Folder" Grid.Column="2" Margin="280,35,59,520"
+              Click="SelectFolder_Click"/>
             <Button x:Name="quitButton" Grid.Column="2" Content="Quit" HorizontalAlignment="Left" Height="17" Margin="361,35,0,0" VerticalAlignment="Top" Width="54" Style="{StaticResource QuitButton}" Click="quitButton_Click"/>
         </Grid>
     </Border>
