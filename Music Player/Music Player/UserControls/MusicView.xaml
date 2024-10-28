@@ -7,9 +7,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+<<<<<<< Updated upstream
         <TextBlock Text="Music player" Style="{StaticResource titleText}"/>
 
         <Border CornerRadius="20" Margin="0 60 0 0">
+=======
+        <TextBlock Text="Music player" Style="{StaticResource titleText}" Margin="40,10,-40,-10"/>
+
+        <Border CornerRadius="20" Margin="0,60,0,-30">
+>>>>>>> Stashed changes
             <Border.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="#30ad9a" Offset="0"/>
@@ -22,16 +28,30 @@
             </Border.Effect>
 
             <Grid>
+<<<<<<< Updated upstream
                 <Border Opacity="0.07" CornerRadius="20">
+=======
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="41*"/>
+                    <ColumnDefinition Width="39*"/>
+                </Grid.ColumnDefinitions>
+                <Border Opacity="0.07" CornerRadius="20" Grid.ColumnSpan="2" Margin="-105,-80,-120,-70">
+>>>>>>> Stashed changes
                     <Border.Background>
                         <ImageBrush ImageSource="/Images/p1.jpg"/>
                     </Border.Background>
                 </Border>
 
                 <!--Music List-->
+<<<<<<< Updated upstream
                 <StackPanel Margin="30">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300" Grid.Row="0">
                         <ItemsControl ItemsSource="{Binding Songs}">
+=======
+                <StackPanel Margin="30,30,30,30" Grid.ColumnSpan="2">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300" Grid.Row="0">
+                        <ItemsControl ItemsSource="{Binding Songs}" Height="290">
+>>>>>>> Stashed changes
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <!-- SongItem with Mouse Click Event -->

@@ -6,13 +6,18 @@
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
 
+<<<<<<< Updated upstream
     <Border Background="White" CornerRadius="40">
+=======
+    <Border Background="#03bf69" CornerRadius="40">
+>>>>>>> Stashed changes
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="128"/>
             </Grid.RowDefinitions>
 
+<<<<<<< Updated upstream
             <!--Menu-->
             <!--
             
@@ -75,6 +80,19 @@
             <Border Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Grid.Column="1" Margin="0,1,0,0" Grid.Row="1">
                 <StackPanel Orientation="Vertical">
                     <!-- First row: Song Details -->
+=======
+            <!-- Music Section -->
+            <Border Background="#333333" CornerRadius="15" Margin="40,120,40,0">
+                <StackPanel>
+                    <ContentControl Content="{Binding CurrentView}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Player Controls Section -->
+            <Border Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Grid.Column="1" Margin="0,1,0,0" Grid.Row="1">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <!-- Song Details -->
+>>>>>>> Stashed changes
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -86,6 +104,10 @@
                                 <ImageBrush ImageSource="/Images/p6.jpg"/>
                             </Ellipse.Fill>
                         </Ellipse>
+<<<<<<< Updated upstream
+=======
+                        
+>>>>>>> Stashed changes
 
                         <StackPanel VerticalAlignment="Center" Grid.Column="1">
                             <TextBlock Text="{Binding ActiveSong.Title}" Foreground="White" FontSize="18" FontWeight="SemiBold"/>
@@ -93,7 +115,18 @@
                         </StackPanel>
                     </Grid>
 
+<<<<<<< Updated upstream
                     <!-- Second row: Buttons and Slider -->
+=======
+                    <!-- Seek Bar with Current Time and Duration -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10, 0">
+                        <TextBlock x:Name="CurrentTimeText" Text="0:00" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                        <Slider x:Name="SeekBar" Width="200" Minimum="0" Maximum="1" Value="0" ValueChanged="SeekBar_ValueChanged" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TotalDurationText" Text="0:00" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Control Buttons (Play/Pause, Seek, etc.) -->
+>>>>>>> Stashed changes
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <Button x:Name="PreviousButton" Style="{StaticResource playerButton}" Click="PreviousButton_Click">
                             <Icon:PackIconMaterial Kind="SkipPrevious" Style="{StaticResource playerButtonIcon}"/>
@@ -107,8 +140,18 @@
                             <Icon:PackIconMaterial Kind="SkipNext" Style="{StaticResource playerButtonIcon}"/>
                         </Button>
 
+<<<<<<< Updated upstream
                         <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider" IsSelectionRangeEnabled="True" VerticalAlignment="Center" Value="0.5" Width="350" SelectionEnd="{Binding ElementName=slider, Path=Value}" Minimum="0" Maximum="10" ValueChanged="slider_VolumeChanged"/>
 
+=======
+                        <Button x:Name="SeekButton" Style="{StaticResource playerButton}" Click="SeekButton_Click">
+                            <Icon:PackIconMaterial Kind="FastForward" Style="{StaticResource playerButtonIcon}"/>
+                        </Button>
+
+                        <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider" IsSelectionRangeEnabled="True" VerticalAlignment="Center" 
+                                Value="0.5" Width="100" SelectionEnd="{Binding ElementName=slider, Path=Value}" Minimum="0" Maximum="10" 
+                                ValueChanged="slider_VolumeChanged"/>
+>>>>>>> Stashed changes
                         <Button Style="{StaticResource playerButton}">
                             <Icon:PackIconMaterial Kind="VolumeMedium" Style="{StaticResource playerButtonIcon}"/>
                         </Button>
@@ -117,11 +160,26 @@
             </Border>
 
             <MediaElement x:Name="mediaElement" Visibility="Collapsed" LoadedBehavior="Manual" UnloadedBehavior="Manual" />
+<<<<<<< Updated upstream
             <Button Style="{StaticResource SelectFolderButton}" Content="Select Folder" Margin="786,35,176,520"
                     Click="SelectFolder_Click"/>
             <Button Style="{StaticResource OpenMusicPlayerButton}" Content="Open Music Player" Margin="638,35,315,520"
                     Click="OpenMusicPlayer_Click"/>
             <Button x:Name="quitButton" Content="Quit" HorizontalAlignment="Left" Height="17" Margin="924,35,0,0" VerticalAlignment="Top" Width="54" Style="{StaticResource QuitButton}"               Click="quitButton_Click"/>
+=======
+            <Button Style="{StaticResource SelectFolderButton}" Content="Select Music Folder" Margin="875,68,47,472" Click="SelectFolder_Click" RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="4.814"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-0.716"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button Style="{StaticResource OpenMusicPlayerButton}" Content="Open Video Player" Margin="710,70,215,472" Click="OpenMusicPlayer_Click"/>
+            <Button x:Name="quitButton" Content="Quit" HorizontalAlignment="Left" Height="37" Margin="925,15,0,0" VerticalAlignment="Top" Width="70" Style="{StaticResource QuitButton}" Click="quitButton_Click"/>
+>>>>>>> Stashed changes
         </Grid>
     </Border>
 </Window>
