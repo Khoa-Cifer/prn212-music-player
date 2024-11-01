@@ -89,5 +89,16 @@ namespace Music_Player
                 mediaElement.Position = TimeSpan.FromSeconds(sliderProgress.Value);
             }
         }
+
+        private void quitButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult answer = MessageBox.Show("Do you really want to quit?? This will let you back to Main screen", "Quit", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (answer == MessageBoxResult.Yes)
+            {
+                mediaElement.Stop();
+
+                this.Close();
+            }
+        }
     }
 }

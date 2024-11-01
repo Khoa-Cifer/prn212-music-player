@@ -8,20 +8,23 @@
         Title="Video Player" Height="700" Width="1050"
         WindowStartupLocation="CenterScreen"
         >
-    <Grid>
+    <Grid Background="{StaticResource BackgroundGradient}">
         <!-- MediaElement for video playback -->
-        <MediaElement Name="mediaElement" LoadedBehavior="Manual" Width="1000" Height="500" Stretch="Uniform" />
+        <MediaElement Name="mediaElement" LoadedBehavior="Manual" Width="1000" Height="500" Stretch="Uniform" Margin="25,77,25,107" />
 
         <!-- Controls for Play, Pause, Stop -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
-            <Button Name="btnSelectFile" Content="Select MP4" Width="100" Margin="5" Click="btnSelectFile_Click" />
-            <Button Name="btnPlay" Content="Play" Width="75" Margin="5" Click="btnPlay_Click" />
-            <Button Name="btnPause" Content="Pause" Width="75" Margin="5" Click="btnPause_Click" />
-            <Button Name="btnStop" Content="Stop" Width="75" Margin="5" Click="btnStop_Click" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,608,0,0">
+            <Button Style="{StaticResource ModernButtonStyle}" Name="btnSelectFile" Content="Select MP4" Width="100" Margin="5" Click="btnSelectFile_Click" />
+            <Button Style="{StaticResource ModernButtonStyle}"  Name="btnPlay" Content="Play" Width="75" Margin="5" Click="btnPlay_Click" />
+            <Button Style="{StaticResource ModernButtonStyle}"  Name="btnPause" Content="Pause" Width="75" Margin="5" Click="btnPause_Click" />
+            <Button Style="{StaticResource ModernButtonStyle}"  Name="btnStop" Content="Stop" Width="75" Margin="5" Click="btnStop_Click" />
         </StackPanel>
 
         <!-- Slider for seeking through the video -->
-        <Slider Name="sliderProgress" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="450" Height="20" Margin="0,0,0,50" ValueChanged="sliderProgress_ValueChanged" />
+        <Slider Name="sliderProgress" HorizontalAlignment="Center" VerticalAlignment="Top" Width="450" Height="20" Margin="0,583,0,0" ValueChanged="sliderProgress_ValueChanged" />
+
+        <Button x:Name="quitButton" Content="Quit" HorizontalAlignment="Left" Height="34" Margin="924,35,0,0" VerticalAlignment="Top" Width="84" Style="{StaticResource QuitButton}" Click="quitButton_Click"/>
+
 
     </Grid>
 </Window>
