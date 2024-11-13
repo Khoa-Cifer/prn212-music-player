@@ -72,7 +72,7 @@
             -->
 
             <!--Player-->
-            <Border Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Grid.Column="1" Margin="0,1,0,0" Grid.Row="1">
+            <Border Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="0 0 40 40" Grid.Column="1" Margin="0,1,0,0" Grid.Row="1">
                 <StackPanel Orientation="Vertical">
                     <!-- First row: Song Details -->
                     <Grid>
@@ -94,7 +94,7 @@
                     </Grid>
 
                     <!-- Second row: Buttons and Slider -->
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Width="906">
                         <Button x:Name="PreviousButton" Style="{StaticResource playerButton}" Click="PreviousButton_Click">
                             <Icon:PackIconMaterial Kind="SkipPrevious" Style="{StaticResource playerButtonIcon}"/>
                         </Button>
@@ -107,11 +107,10 @@
                             <Icon:PackIconMaterial Kind="SkipNext" Style="{StaticResource playerButtonIcon}"/>
                         </Button>
 
-                        <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider" IsSelectionRangeEnabled="True" VerticalAlignment="Center" Value="0.5" Width="350" SelectionEnd="{Binding ElementName=slider, Path=Value}" Minimum="0" Maximum="10" ValueChanged="slider_VolumeChanged"/>
-
                         <Button Style="{StaticResource playerButton}">
                             <Icon:PackIconMaterial Kind="VolumeMedium" Style="{StaticResource playerButtonIcon}"/>
                         </Button>
+                        <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider" IsSelectionRangeEnabled="True" Value="0.5" Width="186" SelectionEnd="{Binding Value, ElementName=slider}" Minimum="0" Maximum="10" ValueChanged="slider_VolumeChanged" Height="32"/>
                     </StackPanel>
                 </StackPanel>
             </Border>

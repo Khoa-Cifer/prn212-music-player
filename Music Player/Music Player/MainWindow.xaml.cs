@@ -113,6 +113,15 @@ namespace Music_Player
             }
         }
 
+        private void SeekBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (Math.Abs(e.NewValue - mediaElement.Position.TotalSeconds) > 1)
+            {
+                mediaElement.Position = TimeSpan.FromSeconds(e.NewValue);
+            }
+        }
+
+
         private void OpenMusicPlayer_Click(object sender, RoutedEventArgs e)
         {
             _songViewModel.ShowVideoView();

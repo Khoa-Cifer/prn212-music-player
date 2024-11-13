@@ -1,6 +1,7 @@
 ﻿<Window x:Class="Music_Player.VideoPlayer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Music_Player"
@@ -8,23 +9,32 @@
         Title="Video Player" Height="700" Width="1050"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent"
         >
-    <Grid Background="{StaticResource BackgroundGradient}">
-        <!-- MediaElement for video playback -->
-        <MediaElement Name="mediaElement" LoadedBehavior="Manual" Width="1000" Height="500" Stretch="Uniform" Margin="25,77,25,107" />
 
-        <!-- Controls for Play, Pause, Stop -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,608,0,0">
-            <Button Style="{StaticResource ModernButtonStyle}" Name="btnSelectFile" Content="Select MP4" Width="100" Margin="5" Click="btnSelectFile_Click" />
-            <Button Style="{StaticResource ModernButtonStyle}"  Name="btnPlay" Content="Play" Width="75" Margin="5" Click="btnPlay_Click" />
-            <Button Style="{StaticResource ModernButtonStyle}"  Name="btnPause" Content="Pause" Width="75" Margin="5" Click="btnPause_Click" />
-            <Button Style="{StaticResource ModernButtonStyle}"  Name="btnStop" Content="Stop" Width="75" Margin="5" Click="btnStop_Click" />
-        </StackPanel>
+    <Border CornerRadius="40" Background="{StaticResource BackgroundGradient}">
+        <Grid>
+            <!-- MediaElement for video playback -->
+            <MediaElement Name="mediaElement" LoadedBehavior="Manual" Width="1000" Height="500" Stretch="Uniform" Margin="25,80,25,120" />
 
-        <!-- Slider for seeking through the video -->
-        <Slider Style="{StaticResource ModernSliderStyle}" Name="sliderProgress" HorizontalAlignment="Center" VerticalAlignment="Top" Width="450" Height="25" Margin="0,583,0,0" ValueChanged="sliderProgress_ValueChanged" />
+            <!-- Controls for Play, Pause, Stop -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,608,0,0">
+                <Button Style="{StaticResource ModernButtonStyle}" Name="btnSelectFile" Content="Select MP4" Width="100" Margin="5" Click="btnSelectFile_Click" />
+                <Button Style="{StaticResource ModernButtonStyle}"  Name="btnPlay" Content="Play" Width="75" Margin="5" Click="btnPlay_Click" />
+                <Button Style="{StaticResource ModernButtonStyle}"  Name="btnPause" Content="Pause" Width="75" Margin="5" Click="btnPause_Click" />
+                <Button Style="{StaticResource ModernButtonStyle}"  Name="btnStop" Content="Stop" Width="75" Margin="5" Click="btnStop_Click" />
+            </StackPanel>
 
-        <Button x:Name="quitButton" Content="Quit" HorizontalAlignment="Left" Height="34" Margin="924,35,0,0" VerticalAlignment="Top" Width="84" Style="{StaticResource QuitButton}" Click="quitButton_Click"/>
+            <!-- Slider for seeking through the video -->
+            <Slider Style="{StaticResource ModernSliderStyle}" Name="sliderProgress" HorizontalAlignment="Center" VerticalAlignment="Top" Width="450" Height="25" Margin="0,583,0,0" ValueChanged="sliderProgress_ValueChanged" />
+
+            <Button Style="{StaticResource playerButton}" Margin="795,603,215,57">
+                <Icon:PackIconMaterial Kind="VolumeMedium" Style="{StaticResource playerButtonIcon}"/>
+            </Button>
+            
+            <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider" IsSelectionRangeEnabled="True" VerticalAlignment="Top" Value="0.5" SelectionEnd="{Binding ElementName=slider, Path=Value}" Minimum="0" Maximum="100" Margin="840,608,10,0" ValueChanged="slider_ValueChanged"/>
+
+            <Button x:Name="quitButton" Content="Quit" HorizontalAlignment="Left" Height="34" Margin="924,35,0,0" VerticalAlignment="Top" Width="84" Style="{StaticResource QuitButton}" Click="quitButton_Click"/>
 
 
-    </Grid>
+        </Grid>
+    </Border>
 </Window>

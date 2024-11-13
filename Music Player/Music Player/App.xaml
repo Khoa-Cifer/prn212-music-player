@@ -129,6 +129,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Slider">
                         <Grid>
+
+                            <Rectangle Height="4" Fill="#D3D3D3" VerticalAlignment="Center"/>
+                            
+
                             <Track x:Name="PART_Track" 
                     VerticalAlignment="Center">
                                 <Track.Thumb>

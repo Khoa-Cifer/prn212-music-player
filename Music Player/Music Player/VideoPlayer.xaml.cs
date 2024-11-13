@@ -100,5 +100,15 @@ namespace Music_Player
                 this.Close();
             }
         }
+
+
+        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+            if (mediaElement != null)
+            {
+                mediaElement.Volume = slider.Value;
+            }
+        }
     }
 }
