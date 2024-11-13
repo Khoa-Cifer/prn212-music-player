@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Music_Player"
         mc:Ignorable="d"
         Title="Video Player" Height="700" Width="1050"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent"
         >
     <Grid Background="{StaticResource BackgroundGradient}">
         <!-- MediaElement for video playback -->
@@ -21,7 +21,7 @@
         </StackPanel>
 
         <!-- Slider for seeking through the video -->
-        <Slider Name="sliderProgress" HorizontalAlignment="Center" VerticalAlignment="Top" Width="450" Height="20" Margin="0,583,0,0" ValueChanged="sliderProgress_ValueChanged" />
+        <Slider Style="{StaticResource ModernSliderStyle}" Name="sliderProgress" HorizontalAlignment="Center" VerticalAlignment="Top" Width="450" Height="25" Margin="0,583,0,0" ValueChanged="sliderProgress_ValueChanged" />
 
         <Button x:Name="quitButton" Content="Quit" HorizontalAlignment="Left" Height="34" Margin="924,35,0,0" VerticalAlignment="Top" Width="84" Style="{StaticResource QuitButton}" Click="quitButton_Click"/>
 
