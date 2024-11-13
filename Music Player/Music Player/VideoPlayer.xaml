@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Music_Player"
         mc:Ignorable="d"
-        Title="Video Player" Height="700" Width="1050"
+        Height="700" Width="1050" ResizeMode="NoResize" AllowsTransparency="True"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent"
         >
 
