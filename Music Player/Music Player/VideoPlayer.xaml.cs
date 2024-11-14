@@ -107,7 +107,8 @@ namespace Music_Player
 
             if (mediaElement != null)
             {
-                mediaElement.Volume = slider.Value;
+                double valueFactor = 10;
+                mediaElement.Volume = slider.Value/valueFactor;
             }
         }
     }

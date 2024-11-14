@@ -6,7 +6,7 @@
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
 
-    <Border Background="White" CornerRadius="40">
+    <Border Background="{StaticResource BackgroundGradient}" CornerRadius="40">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -41,7 +41,7 @@
             -->
 
             <!--Music Section-->
-            <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Background="White" Margin="40 60 10 0">
+            <StackPanel Background="{StaticResource BackgroundGradient}" Margin="25,60,25,0">
                 <ContentControl Content="{Binding CurrentView}"/>
             </StackPanel>
 
@@ -116,11 +116,11 @@
             </Border>
 
             <MediaElement x:Name="mediaElement" Visibility="Collapsed" LoadedBehavior="Manual" UnloadedBehavior="Manual" />
-            <Button Style="{StaticResource SelectFolderButton}" Content="Select Folder" Margin="786,35,176,520"
+            <Button Style="{StaticResource SelectFolderButton}" Content="Select Folder" Margin="787,22,163,520"
                     Click="SelectFolder_Click"/>
-            <Button Style="{StaticResource OpenMusicPlayerButton}" Content="Open Music Player" Margin="638,35,315,520"
+            <Button Style="{StaticResource OpenMusicPlayerButton}" Content="Open Music Player" Margin="638,22,312,520"
                     Click="OpenMusicPlayer_Click"/>
-            <Button x:Name="quitButton" Content="Quit" HorizontalAlignment="Left" Height="17" Margin="924,35,0,0" VerticalAlignment="Top" Width="54" Style="{StaticResource QuitButton}"               Click="quitButton_Click"/>
+            <Button x:Name="quitButton" Content="Exit" HorizontalAlignment="Left" Height="30" Margin="930,22,0,0" VerticalAlignment="Top" Width="95" Style="{StaticResource QuitButton}"               Click="quitButton_Click"/>
         </Grid>
     </Border>
 </Window>

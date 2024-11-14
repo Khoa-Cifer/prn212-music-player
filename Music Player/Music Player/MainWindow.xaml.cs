@@ -28,7 +28,16 @@ namespace Music_Player
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
+                //MessageBox.Show("You selected: " + dialog.FileName);
                 _songViewModel = new SongViewModel(dialog.FileName);
+                //this.DataContext = _songViewModel;
+
+                //_songViewModel.PlaySongAction = (filePath) =>
+                //{
+                //    mediaElement.Source = new Uri(filePath, UriKind.RelativeOrAbsolute);
+                //    mediaElement.Play();
+                //    mediaElement.MediaEnded += MediaElement_MediaEnded;
+                //};
             }
             else
             {
@@ -72,7 +81,8 @@ namespace Music_Player
         {
             if (mediaElement != null)
             {
-                mediaElement.Volume = slider.Value;
+                double volumeFactor = 10;
+                mediaElement.Volume = slider.Value/volumeFactor;
             }
         }
 
@@ -82,6 +92,8 @@ namespace Music_Player
             if (_songViewModel != null && _songViewModel.NextSongCommand.CanExecute(null))
             {
                 _songViewModel.NextSongCommand.Execute(null);
+                isPlaying = true;
+                playPauseIcon.Kind = PackIconMaterialKind.Pause;
             }
         }
 
@@ -90,6 +102,8 @@ namespace Music_Player
             if (_songViewModel != null && _songViewModel.PreviousSongCommand.CanExecute(null))
             {
                 _songViewModel.PreviousSongCommand.Execute(null);
+                isPlaying = true;
+                playPauseIcon.Kind = PackIconMaterialKind.Pause;
             }
         }
 
@@ -108,6 +122,8 @@ namespace Music_Player
                 {
                     mediaElement.Source = new Uri(filePath, UriKind.RelativeOrAbsolute);
                     mediaElement.Play();
+                    isPlaying = true;
+                    playPauseIcon.Kind = PackIconMaterialKind.Pause;
                     mediaElement.MediaEnded += MediaElement_MediaEnded;
                 };
             }
@@ -124,6 +140,7 @@ namespace Music_Player
 
         private void OpenMusicPlayer_Click(object sender, RoutedEventArgs e)
         {
+            mediaElement.Stop();
             _songViewModel.ShowVideoView();
         }
     }

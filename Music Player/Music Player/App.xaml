@@ -166,6 +166,7 @@
         <Style x:Key="playerButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Width" Value="40"/>
             <Setter Property="Height" Value="40"/>
             <Setter Property="Margin" Value="3 0"/>
