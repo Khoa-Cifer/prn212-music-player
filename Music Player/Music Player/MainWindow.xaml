@@ -100,7 +100,7 @@
                         </Button>
 
                         <Button Style="{StaticResource playerButton}" Command="{Binding PlayCommand}" Click="Button_PausePlay">
-                            <Icon:PackIconMaterial x:Name="playPauseIcon" Kind="Pause" Style="{StaticResource playerButtonIcon}"/>
+                            <Icon:PackIconMaterial x:Name="playPauseIcon" Kind="Play" Style="{StaticResource playerButtonIcon}"/>
                         </Button>
 
                         <Button x:Name="NextButton" Style="{StaticResource playerButton}" Click="NextButton_Click">

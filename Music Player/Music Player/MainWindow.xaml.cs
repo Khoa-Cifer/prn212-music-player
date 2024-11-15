@@ -36,8 +36,10 @@ namespace Music_Player
                 {
                     mediaElement.Source = new Uri(filePath, UriKind.RelativeOrAbsolute);
                     mediaElement.Play();
+                    playPauseIcon.Kind = PackIconMaterialKind.Pause;
                     mediaElement.MediaEnded += MediaElement_MediaEnded;
-                };
+
+                    };
             }
             else
             {
@@ -64,6 +66,14 @@ namespace Music_Player
 
         private void Button_PausePlay(object sender, RoutedEventArgs e)
         {
+            if (_songViewModel.ActiveSong == null)
+            {
+                var firstSong = _songViewModel.Songs.First();
+                _songViewModel.SetActiveSong(firstSong);
+                isPlaying = false;
+                playPauseIcon.Kind = PackIconMaterialKind.Play;
+            }
+
             if (isPlaying)
             {
                 mediaElement.Pause();
