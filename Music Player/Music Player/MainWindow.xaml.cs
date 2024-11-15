@@ -23,23 +23,22 @@ namespace Music_Player
             CommonOpenFileDialog dialog = new CommonOpenFileDialog
             {
                 InitialDirectory = @"C:\Users",
-                IsFolderPicker = true 
+                IsFolderPicker = true
             };
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                MessageBox.Show("You selected: " + dialog.FileName);
+                //MessageBox.Show("You selected: " + dialog.FileName);
                 _songViewModel = new SongViewModel(dialog.FileName);
-                this.DataContext = _songViewModel;
+                //this.DataContext = _songViewModel;
 
-                _songViewModel.PlaySongAction = (filePath) =>
-                {
-                    mediaElement.Source = new Uri(filePath, UriKind.RelativeOrAbsolute);
-                    mediaElement.Play();
-                    playPauseIcon.Kind = PackIconMaterialKind.Pause;
-                    mediaElement.MediaEnded += MediaElement_MediaEnded;
-
-                    };
+                //_songViewModel.PlaySongAction = (filePath) =>
+                //{
+                //    mediaElement.Source = new Uri(filePath, UriKind.RelativeOrAbsolute);
+                //    mediaElement.Play();
+                //    playPauseIcon.Kind = PackIconMaterialKind.Pause;
+                //    mediaElement.MediaEnded += MediaElement_MediaEnded;
+                //};
             }
             else
             {
@@ -92,7 +91,7 @@ namespace Music_Player
             if (mediaElement != null)
             {
                 double volumeFactor = 10;
-                mediaElement.Volume = slider.Value/volumeFactor;
+                mediaElement.Volume = slider.Value / volumeFactor;
             }
         }
 
