@@ -24,15 +24,22 @@
             </StackPanel>
 
             <!-- Slider for seeking through the video -->
-            <Slider Style="{StaticResource ModernSliderStyle}" Name="sliderProgress" HorizontalAlignment="Center" VerticalAlignment="Top" Width="450" Height="25" Margin="0,583,0,0" ValueChanged="sliderProgress_ValueChanged" />
+            <Slider Style="{StaticResource ModernSliderStyle}" Name="sliderProgress" HorizontalAlignment="Center" VerticalAlignment="Top" Width="450" Height="25" Margin="0,583,0,0" ValueChanged="sliderProgress_ValueChanged" PreviewMouseLeftButtonDown="sliderProgress_PreviewMouseLeftButtonDown" />
 
             <Button Style="{StaticResource playerButton}" Margin="795,603,215,57">
                 <Icon:PackIconMaterial Kind="VolumeMedium" Style="{StaticResource playerButtonIcon}"/>
             </Button>
-            
+
+
+
             <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider" IsSelectionRangeEnabled="True" VerticalAlignment="Top" Value="0.5" SelectionEnd="{Binding ElementName=slider, Path=Value}" Minimum="0" Maximum="100" Margin="840,608,10,0" ValueChanged="slider_ValueChanged"/>
 
             <Button x:Name="quitButton" Content="Quit" HorizontalAlignment="Left" Height="34" Margin="924,35,0,0" VerticalAlignment="Top" Width="84" Style="{StaticResource QuitButton}" Click="quitButton_Click"/>
+
+            <TextBlock TextWrapping="Wrap" Text="{Binding ActiveSong.Title}" Foreground="White" FontSize="18" FontWeight="SemiBold" Margin="12,588,755,73"/>
+
+            <TextBlock TextWrapping="Wrap" Text="{Binding ActiveSong.Time}" Foreground="White" FontSize="14" Margin="756,583,182,95"/>
+
 
 
         </Grid>

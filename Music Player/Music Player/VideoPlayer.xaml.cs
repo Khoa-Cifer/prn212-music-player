@@ -111,5 +111,19 @@ namespace Music_Player
                 mediaElement.Volume = slider.Value/valueFactor;
             }
         }
+
+        private void sliderProgress_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var position = e.GetPosition(sliderProgress);
+
+
+            double newValue = position.X / sliderProgress.ActualWidth * sliderProgress.Maximum;
+
+
+            sliderProgress.Value = newValue;
+
+
+            sliderProgress_ValueChanged(sender, new RoutedPropertyChangedEventArgs<double>(sliderProgress.Value, newValue));
+        }
     }
 }

@@ -28,16 +28,18 @@ namespace Music_Player
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                //MessageBox.Show("You selected: " + dialog.FileName);
+                MessageBox.Show("You selected: " + dialog.FileName);
                 _songViewModel = new SongViewModel(dialog.FileName);
-                //this.DataContext = _songViewModel;
+                this.DataContext = _songViewModel;
 
-                //_songViewModel.PlaySongAction = (filePath) =>
-                //{
-                //    mediaElement.Source = new Uri(filePath, UriKind.RelativeOrAbsolute);
-                //    mediaElement.Play();
-                //    mediaElement.MediaEnded += MediaElement_MediaEnded;
-                //};
+                _songViewModel.PlaySongAction = (filePath) =>
+                {
+                    mediaElement.Source = new Uri(filePath, UriKind.RelativeOrAbsolute);
+                    mediaElement.Play();
+                    playPauseIcon.Kind = PackIconMaterialKind.Pause;
+                    mediaElement.MediaEnded += MediaElement_MediaEnded;
+
+                    };
             }
             else
             {
@@ -64,6 +66,14 @@ namespace Music_Player
 
         private void Button_PausePlay(object sender, RoutedEventArgs e)
         {
+            if (_songViewModel.ActiveSong == null)
+            {
+                var firstSong = _songViewModel.Songs.First();
+                _songViewModel.SetActiveSong(firstSong);
+                isPlaying = false;
+                playPauseIcon.Kind = PackIconMaterialKind.Play;
+            }
+
             if (isPlaying)
             {
                 mediaElement.Pause();

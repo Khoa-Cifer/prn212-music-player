@@ -110,7 +110,7 @@ namespace Music_Player.ViewModel
             }
         }
 
-        private void SetActiveSong(Song selectedSong)
+        public void SetActiveSong(Song selectedSong)
         {
             foreach (var song in Songs)
             {
