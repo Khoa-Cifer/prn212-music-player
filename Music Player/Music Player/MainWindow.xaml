@@ -115,6 +115,8 @@
                 </StackPanel>
             </Border>
 
+            <Slider Style="{StaticResource ModernSliderStyle}" x:Name="sliderProgress" Width="462" Height="40" ValueChanged="sliderProgress_ValueChanged" PreviewMouseDown="sliderProgress_PreviewMouseDown" PreviewMouseUp="sliderProgress_PreviewMouseUp" Margin="516,24,72,0" VerticalAlignment="Top" Grid.Row="1" PreviewMouseLeftButtonDown="sliderProgress_PreviewMouseLeftButtonDown" />
+
             <MediaElement x:Name="mediaElement" Visibility="Collapsed" LoadedBehavior="Manual" UnloadedBehavior="Manual" />
             <Button Style="{StaticResource SelectFolderButton}" Content="Select Folder" Margin="787,22,163,520"
                     Click="SelectFolder_Click"/>

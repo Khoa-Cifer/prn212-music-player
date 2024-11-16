@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Windows.Threading;
 
 
 namespace Music_Player
@@ -16,29 +17,39 @@ namespace Music_Player
         private bool isPlaying = true;
         private SongViewModel _songViewModel;
 
+        private DispatcherTimer timer;
+        private bool isDragging = false;
+
         public MainWindow()
         {
             InitializeComponent();
+            timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            timer.Tick += Timer_Tick;
+            timer.Start();
 
             CommonOpenFileDialog dialog = new CommonOpenFileDialog
             {
                 InitialDirectory = @"C:\Users",
-                IsFolderPicker = true
+                IsFolderPicker = true 
             };
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                //MessageBox.Show("You selected: " + dialog.FileName);
+                MessageBox.Show("You selected: " + dialog.FileName);
                 _songViewModel = new SongViewModel(dialog.FileName);
-                //this.DataContext = _songViewModel;
+                this.DataContext = _songViewModel;
 
-                //_songViewModel.PlaySongAction = (filePath) =>
-                //{
-                //    mediaElement.Source = new Uri(filePath, UriKind.RelativeOrAbsolute);
-                //    mediaElement.Play();
-                //    playPauseIcon.Kind = PackIconMaterialKind.Pause;
-                //    mediaElement.MediaEnded += MediaElement_MediaEnded;
-                //};
+                _songViewModel.PlaySongAction = (filePath) =>
+                {
+                    mediaElement.Source = new Uri(filePath, UriKind.RelativeOrAbsolute);
+                    mediaElement.Play();
+                    playPauseIcon.Kind = PackIconMaterialKind.Pause;
+                    mediaElement.MediaEnded += MediaElement_MediaEnded;
+
+                };
             }
             else
             {
@@ -56,7 +67,7 @@ namespace Music_Player
 
         private void quitButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult answer = MessageBox.Show("Do you really want to quit??", "Quit", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult answer = MessageBox.Show("Do you really want to EXIT ???", "EXIT", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (answer == MessageBoxResult.Yes)
             {
                 Application.Current.Shutdown();
@@ -91,7 +102,7 @@ namespace Music_Player
             if (mediaElement != null)
             {
                 double volumeFactor = 10;
-                mediaElement.Volume = slider.Value / volumeFactor;
+                mediaElement.Volume = slider.Value/volumeFactor;
             }
         }
 
@@ -151,6 +162,45 @@ namespace Music_Player
         {
             mediaElement.Stop();
             _songViewModel.ShowVideoView();
+        }
+
+        private void sliderProgress_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!isDragging && mediaElement.NaturalDuration.HasTimeSpan)
+            {
+                mediaElement.Position = TimeSpan.FromSeconds(sliderProgress.Value);
+            }
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (!isDragging && mediaElement.NaturalDuration.HasTimeSpan)
+            {
+                sliderProgress.Maximum = mediaElement.NaturalDuration.TimeSpan.TotalSeconds;
+                sliderProgress.Value = mediaElement.Position.TotalSeconds;
+            }
+        }
+        private void sliderProgress_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            isDragging = true; // Ngăn không cho Timer cập nhật thanh trượt khi đang kéo
+        }
+        private void sliderProgress_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            isDragging = false;
+            mediaElement.Position = TimeSpan.FromSeconds(sliderProgress.Value); // Cập nhật vị trí phát nhạc
+        }
+
+        private void sliderProgress_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var position = e.GetPosition(sliderProgress);
+
+
+            double newValue = position.X / sliderProgress.ActualWidth * sliderProgress.Maximum;
+
+
+            sliderProgress.Value = newValue;
+
+
+            sliderProgress_ValueChanged(sender, new RoutedPropertyChangedEventArgs<double>(sliderProgress.Value, newValue));
         }
     }
 }

@@ -16,7 +16,7 @@
             <MediaElement Name="mediaElement" LoadedBehavior="Manual" Width="1000" Height="500" Stretch="Uniform" Margin="25,80,25,120" />
 
             <!-- Controls for Play, Pause, Stop -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,608,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,618,0,0">
                 <Button Style="{StaticResource ModernButtonStyle}" Name="btnSelectFile" Content="Select MP4" Width="100" Margin="5" Click="btnSelectFile_Click" />
                 <Button Style="{StaticResource ModernButtonStyle}"  Name="btnPlay" Content="Play" Width="75" Margin="5" Click="btnPlay_Click" />
                 <Button Style="{StaticResource ModernButtonStyle}"  Name="btnPause" Content="Pause" Width="75" Margin="5" Click="btnPause_Click" />
@@ -34,11 +34,13 @@
 
             <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider" IsSelectionRangeEnabled="True" VerticalAlignment="Top" Value="0.5" SelectionEnd="{Binding ElementName=slider, Path=Value}" Minimum="0" Maximum="100" Margin="840,608,10,0" ValueChanged="slider_ValueChanged"/>
 
-            <Button x:Name="quitButton" Content="Quit" HorizontalAlignment="Left" Height="34" Margin="924,35,0,0" VerticalAlignment="Top" Width="84" Style="{StaticResource QuitButton}" Click="quitButton_Click"/>
+            <Button x:Name="quitButton" Content="Back" HorizontalAlignment="Left" Height="35" Margin="795,35,0,0" VerticalAlignment="Top" Width="100" Style="{StaticResource QuitButton}" Click="quitButton_Click"/>
 
-            <TextBlock TextWrapping="Wrap" Text="{Binding ActiveSong.Title}" Foreground="White" FontSize="18" FontWeight="SemiBold" Margin="12,588,755,73"/>
+            <TextBlock Text="{Binding ActiveSong.Title}" Foreground="White" FontSize="18" FontWeight="SemiBold" Margin="12,588,755,73"/>
 
-            <TextBlock TextWrapping="Wrap" Text="{Binding ActiveSong.Time}" Foreground="White" FontSize="14" Margin="756,583,182,95"/>
+            <TextBlock Text="{Binding ActiveSong.Time}" Foreground="White" FontSize="14" Margin="756,583,182,95"/>
+            
+            <Button Style="{StaticResource SelectFolderButton}" Content="Exit" HorizontalAlignment="Left" Margin="919,35,0,0" VerticalAlignment="Top" Height="35" Width="100" Click="Button_Click"/>
 
 
 

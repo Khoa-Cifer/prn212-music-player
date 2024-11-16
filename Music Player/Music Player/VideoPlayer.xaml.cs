@@ -125,5 +125,11 @@ namespace Music_Player
 
             sliderProgress_ValueChanged(sender, new RoutedPropertyChangedEventArgs<double>(sliderProgress.Value, newValue));
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult answer = MessageBox.Show("Do you really want to EXIT ???", "EXIT", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (answer == MessageBoxResult.Yes) Application.Current.Shutdown();
+        }
     }
 }
